@@ -51,7 +51,7 @@ export default function Trading() {
                   <div>
                     <p className="font-semibold text-[#ffffff] text-sm mb-1">Copy the Private Sale Wallet Address</p>
                     <div className="bg-[#0a1f1a] p-2 rounded border border-[#00d4aa]/20 mb-2">
-                      <p className="text-[#00d4aa] text-xs break-all font-mono">2peoJaJcN3B1Tgbp6KSf9i9Cbm96UzzCKoaSW17eCUdT</p>
+                      <p className="text-[#00d4aa] text-xs break-all font-mono">7x8pZDmg8gLyP9x17viHmt2hwEmcQqX4pfx3xqNmDtnF</p>
                     </div>
                     <p className="text-[#b0d4cc] text-xs">Click the wallet address above to copy it to your clipboard.</p>
                   </div>
