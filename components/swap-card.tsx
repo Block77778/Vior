@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useWallet } from './wallet-context'
 
-const PRIVATE_SALE_WALLET = '2peoJaJcN3B1Tgbp6KSf9i9Cbm96UzzCKoaSW17eCUdT'
+const PRIVATE_SALE_WALLET = '7x8pZDmg8gLyP9x17viHmt2hwEmcQqX4pfx3xqNmDtnF'
 
 // Dedicated RPC endpoints for transactions (more reliable ones)
 const TRANSACTION_RPC_ENDPOINTS = [
