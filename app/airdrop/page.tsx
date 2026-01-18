@@ -1,42 +1,41 @@
 'use client'
 
-import React from "react"
+import React, { useState } from "react"
 
-import { useState } from 'react'
 import Link from 'next/link'
-import { Twitter, Instagram, Copy, Check } from 'lucide-react'
+import { Twitter, Instagram, Clock, CheckCircle } from 'lucide-react'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import { useWallet } from '@/components/wallet-context'
+import { Check, Copy } from 'lucide-react'
 
 export default function AirdropPage() {
-  const { connectWallet, connected, publicKey } = useWallet()
-  const [walletAddress, setWalletAddress] = useState('')
-  const [copied, setCopied] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  const [connected, setConnected] = useState(false);
+  const [publicKey, setPublicKey] = useState('');
+  const [walletAddress, setWalletAddress] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const connectWallet = () => {
+    // Placeholder for wallet connection logic
+    setConnected(true);
+    setPublicKey('samplePublicKey');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Placeholder for form submission logic
+    setSubmitted(true);
+  };
 
   const handleCopyAddress = () => {
-    if (publicKey) {
-      navigator.clipboard.writeText(publicKey)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (walletAddress.trim()) {
-      setSubmitted(true)
-      setTimeout(() => {
-        setWalletAddress('')
-        setSubmitted(false)
-      }, 3000)
-    }
-  }
+    navigator.clipboard.writeText(publicKey);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <main className="min-h-screen bg-[#0a1f1a] overflow-hidden">
-      <Header connectWallet={connectWallet} connected={connected} publicKey={publicKey} />
+      <Header />
       
       {/* Airdrop Section */}
       <section className="min-h-screen flex items-center justify-center pt-24 pb-16">
@@ -59,7 +58,7 @@ export default function AirdropPage() {
                   Free VIOR Airdrop
                 </h1>
                 <p className="text-xl text-[#b0d4cc]">
-                  Get 1000 free VIOR tokens! Follow us on social media and submit your Phantom wallet address to claim your airdrop.
+                  Get 1000 free VIOR tokens! Follow us on X and Instagram, then comment your Phantom wallet address on our airdrop posts to claim.
                 </p>
               </div>
 
@@ -73,7 +72,7 @@ export default function AirdropPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-[#ffffff] mb-1">Follow on X (Twitter)</h3>
-                      <p className="text-[#b0d4cc]">Follow @Vior_Coin on Twitter for the latest updates</p>
+                      <p className="text-[#b0d4cc]">Follow @Vior_Coin on X for the latest updates</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -90,8 +89,17 @@ export default function AirdropPage() {
                       3
                     </div>
                     <div>
-                      <h3 className="font-bold text-[#ffffff] mb-1">Submit Your Wallet</h3>
-                      <p className="text-[#b0d4cc]">Enter your Phantom wallet address below</p>
+                      <h3 className="font-bold text-[#ffffff] mb-1">Comment Your Wallet</h3>
+                      <p className="text-[#b0d4cc]">Comment your Phantom Solana wallet address on the airdrop posts</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#00d4aa] text-[#0a1f1a] font-bold flex-shrink-0">
+                      4
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-[#ffffff] mb-1">Wait & Receive</h3>
+                      <p className="text-[#b0d4cc]">Receive your 1000 VIOR tokens within 48 hours</p>
                     </div>
                   </div>
                 </div>
@@ -120,8 +128,9 @@ export default function AirdropPage() {
               </div>
             </div>
 
-            {/* Right Side - Form */}
+            {/* Right Side - Info Cards */}
             <div className="space-y-6 animate-fade-in-right">
+              {/* Main Reward Card */}
               <div className="p-8 rounded-2xl border border-[#00d4aa]/30 bg-gradient-to-br from-[#132b24]/50 to-[#0a1f1a]/50 backdrop-blur-sm">
                 <div className="mb-6">
                   <div className="inline-block px-4 py-2 rounded-full bg-[#00d4aa]/10 border border-[#00d4aa]/30 mb-4">
@@ -129,84 +138,84 @@ export default function AirdropPage() {
                   </div>
                 </div>
 
-                {!connected ? (
-                  <div className="space-y-4">
-                    <p className="text-[#b0d4cc] mb-6">
-                      Connect your Phantom wallet to submit your airdrop claim.
-                    </p>
-                    <button
-                      onClick={connectWallet}
-                      className="w-full px-6 py-3 rounded-lg bg-[#00d4aa] text-[#0a1f1a] font-bold hover:shadow-lg hover:shadow-[#00d4aa]/40 transition-all"
-                    >
-                      Connect Phantom Wallet
-                    </button>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="font-bold text-[#ffffff] mb-3">Next Steps:</h3>
+                    <ol className="space-y-3 text-[#b0d4cc]">
+                      <li className="flex gap-3">
+                        <span className="text-[#00d4aa] font-bold">1.</span>
+                        <span>Head over to our X post and comment your Phantom wallet address</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-[#00d4aa] font-bold">2.</span>
+                        <span>Also comment on our Instagram airdrop post with your wallet address</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-[#00d4aa] font-bold">3.</span>
+                        <span>Wait 48 hours and check your Phantom wallet for the tokens</span>
+                      </li>
+                    </ol>
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-[#b0d4cc] text-sm font-medium mb-2">
-                        Your Phantom Wallet Address
-                      </label>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={publicKey || ''}
-                          readOnly
-                          className="flex-1 px-4 py-3 rounded-lg bg-[#0a1f1a] border border-[#00d4aa]/20 text-[#00d4aa] text-sm"
-                        />
-                        <button
-                          type="button"
-                          onClick={handleCopyAddress}
-                          className="px-4 py-3 rounded-lg bg-[#132b24] border border-[#00d4aa]/20 text-[#00d4aa] hover:border-[#00d4aa] transition-all"
-                        >
-                          {copied ? <Check size={20} /> : <Copy size={20} />}
-                        </button>
-                      </div>
+
+                  <div className="pt-4 border-t border-[#00d4aa]/20">
+                    <p className="text-[#b0d4cc] text-sm mb-4">
+                      Click below to go to our social media posts:
+                    </p>
+                    <div className="flex gap-3">
+                      <a
+                        href="https://twitter.com/Vior_Coin"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#00d4aa] text-[#0a1f1a] font-bold hover:shadow-lg hover:shadow-[#00d4aa]/40 transition-all"
+                      >
+                        <Twitter size={18} />
+                        <span>Go to X Post</span>
+                      </a>
+                      <a
+                        href="https://instagram.com/viorcoin"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#00d4aa] text-[#0a1f1a] font-bold hover:shadow-lg hover:shadow-[#00d4aa]/40 transition-all"
+                      >
+                        <Instagram size={18} />
+                        <span>Go to IG Post</span>
+                      </a>
                     </div>
-
-                    <div>
-                      <label className="block text-[#b0d4cc] text-sm font-medium mb-2">
-                        Confirm Your Wallet Address
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Paste your wallet address to confirm"
-                        value={walletAddress}
-                        onChange={(e) => setWalletAddress(e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-[#0a1f1a] border border-[#00d4aa]/20 text-[#ffffff] placeholder-[#b0d4cc]/50 focus:outline-none focus:border-[#00d4aa]/50"
-                      />
-                    </div>
-
-                    <div className="p-4 rounded-lg bg-[#00d4aa]/10 border border-[#00d4aa]/20">
-                      <p className="text-[#b0d4cc] text-sm">
-                        ✓ Make sure you've followed us on both X and Instagram before submitting
-                      </p>
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={!walletAddress.trim()}
-                      className="w-full px-6 py-3 rounded-lg bg-[#00d4aa] text-[#0a1f1a] font-bold hover:shadow-lg hover:shadow-[#00d4aa]/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {submitted ? 'Claimed! 🎉' : 'Claim 1000 VIOR'}
-                    </button>
-
-                    {submitted && (
-                      <div className="p-4 rounded-lg bg-[#00d4aa]/20 border border-[#00d4aa]/50">
-                        <p className="text-[#00d4aa] font-bold">
-                          🎉 Airdrop claimed successfully! Check your wallet.
-                        </p>
-                      </div>
-                    )}
-                  </form>
-                )}
+                  </div>
+                </div>
               </div>
 
-              {/* Info Box */}
-              <div className="p-4 rounded-lg bg-[#132b24]/50 border border-[#00d4aa]/20">
-                <p className="text-[#b0d4cc] text-sm">
-                  <strong>Note:</strong> Make sure to follow both social accounts and use a valid Phantom wallet address to receive your free 1000 VIOR tokens.
-                </p>
+              {/* Timeline Card */}
+              <div className="p-6 rounded-2xl border border-[#00d4aa]/20 bg-[#132b24]/30">
+                <div className="flex items-start gap-4">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#00d4aa]/20 border border-[#00d4aa]/50 flex-shrink-0">
+                    <Clock size={24} className="text-[#00d4aa]" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#00d4aa] mb-1">Receive Within 48 Hours</h3>
+                    <p className="text-[#b0d4cc] text-sm">
+                      After commenting your wallet address on both X and Instagram, you will receive your 1000 VIOR tokens directly to your Phantom wallet within 48 hours.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Requirements Card */}
+              <div className="p-6 rounded-2xl border border-[#00d4aa]/20 bg-[#132b24]/30">
+                <div className="flex items-start gap-4">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#00d4aa]/20 border border-[#00d4aa]/50 flex-shrink-0">
+                    <CheckCircle size={24} className="text-[#00d4aa]" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#00d4aa] mb-2">Requirements:</h3>
+                    <ul className="space-y-1 text-[#b0d4cc] text-sm">
+                      <li>✓ Follow @Vior_Coin on X</li>
+                      <li>✓ Follow @viorcoin on Instagram</li>
+                      <li>✓ Comment your valid Phantom wallet address on both posts</li>
+                      <li>✓ Have an active Phantom wallet</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
