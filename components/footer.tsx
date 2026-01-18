@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Twitter, Github, Mail, Send } from 'lucide-react'
+import { Twitter, Github, Mail, Send, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -20,11 +20,11 @@ export default function Footer() {
               Real-world business backed Solana token merging profitability with blockchain.
             </p>
             <div className="flex gap-4 pt-4">
-              <a href="#" className="w-10 h-10 rounded-lg bg-[#132b24] border border-[#00d4aa]/20 flex items-center justify-center text-[#00d4aa] hover:border-[#00d4aa]/50 transition-all">
+              <a href="https://twitter.com/Vior_Coin" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-[#132b24] border border-[#00d4aa]/20 flex items-center justify-center text-[#00d4aa] hover:border-[#00d4aa]/50 transition-all">
                 <Twitter size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-[#132b24] border border-[#00d4aa]/20 flex items-center justify-center text-[#00d4aa] hover:border-[#00d4aa]/50 transition-all">
-                <Github size={18} />
+              <a href="https://instagram.com/viorcoin" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-[#132b24] border border-[#00d4aa]/20 flex items-center justify-center text-[#00d4aa] hover:border-[#00d4aa]/50 transition-all">
+                <Instagram size={18} />
               </a>
               <a href="#" className="w-10 h-10 rounded-lg bg-[#132b24] border border-[#00d4aa]/20 flex items-center justify-center text-[#00d4aa] hover:border-[#00d4aa]/50 transition-all">
                 <Mail size={18} />
@@ -47,9 +47,9 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-[#ffffff]">Community</h4>
             <ul className="space-y-2 text-[#b0d4cc]">
-              <li><Link href="#" className="hover:text-[#00d4aa] transition-colors">Discord</Link></li>
-              <li><Link href="#" className="hover:text-[#00d4aa] transition-colors">Telegram</Link></li>
-              <li><Link href="#" className="hover:text-[#00d4aa] transition-colors">Twitter</Link></li>
+              <li><Link href="/airdrop" className="hover:text-[#00d4aa] transition-colors">Airdrop</Link></li>
+              <li><Link href="https://twitter.com/Vior_Coin" target="_blank" rel="noopener noreferrer" className="hover:text-[#00d4aa] transition-colors">Twitter (X)</Link></li>
+              <li><Link href="https://instagram.com/viorcoin" target="_blank" rel="noopener noreferrer" className="hover:text-[#00d4aa] transition-colors">Instagram</Link></li>
               <li><Link href="#" className="hover:text-[#00d4aa] transition-colors">Medium Blog</Link></li>
             </ul>
           </div>
