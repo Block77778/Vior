@@ -3,14 +3,14 @@
 import { useState } from "react"
 import Link from "next/link"
 
-export default function Header({ connectWallet, connected, publicKey }) {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <header className="fixed top-0 w-full z-50 animate-slide-down">
       <div className="absolute inset-0 overflow-hidden">
         <video autoPlay muted loop className="w-full h-full object-cover">
-          <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202025-11-19%20at%203.46.45%20AM-iSyPrtXkFG4HPeKcFnQYZ893b0hE1V.mp4" type="video/mp4" />
+          <source src="/images/whatsapp-20video-202025-11-19-20at-203.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[#0a1f1a]/95 backdrop-blur-md"></div>
       </div>
@@ -42,12 +42,12 @@ export default function Header({ connectWallet, connected, publicKey }) {
           </nav>
 
           <div className="hidden sm:flex items-center gap-4">
-            <button
-              onClick={connectWallet}
+            <Link
+              href="/airdrop"
               className="px-6 py-2.5 rounded-full bg-[#00d4aa] text-[#0a1f1a] font-bold hover:shadow-xl hover:shadow-[#00d4aa]/40 transition-all duration-300 hover:scale-105 transform"
             >
-              {connected ? `${publicKey?.slice(0, 6)}...` : "Connect Wallet"}
-            </button>
+              Apply for Airdrop
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -71,12 +71,12 @@ export default function Header({ connectWallet, connected, publicKey }) {
                 {item}
               </Link>
             ))}
-            <button
-              onClick={connectWallet}
+            <Link
+              href="/airdrop"
               className="w-full px-4 py-2.5 rounded-full bg-[#00d4aa] text-[#0a1f1a] font-bold mt-4 hover:shadow-lg transition-all"
             >
-              {connected ? `${publicKey?.slice(0, 6)}...` : "Connect Wallet"}
-            </button>
+              Apply for Airdrop
+            </Link>
           </nav>
         )}
       </div>
