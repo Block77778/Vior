@@ -10,7 +10,7 @@ export default function Header({ connectWallet, connected, publicKey }) {
     <header className="fixed top-0 w-full z-50 animate-slide-down">
       <div className="absolute inset-0 overflow-hidden">
         <video autoPlay muted loop className="w-full h-full object-cover">
-          <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Video%202025-11-19%20at%203.46.45%20AM-iSyPrtXkFG4HPeKcFnQYZ893b0hE1V.mp4" type="video/mp4" />
+          <source src="/images/whatsapp-20video-202025-11-19-20at-203.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[#0a1f1a]/95 backdrop-blur-md"></div>
       </div>
@@ -29,13 +29,20 @@ export default function Header({ connectWallet, connected, publicKey }) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {["Ecosystem", "Tokenomics", "Trading", "Roadmap", "Whitepaper"].map((item, i) => (
+            {[
+              { label: "Ecosystem", href: "#ecosystem" },
+              { label: "Tokenomics", href: "#tokenomics" },
+              { label: "Trading", href: "#trading" },
+              { label: "Roadmap", href: "#roadmap" },
+              { label: "Whitepaper", href: "#whitepaper" },
+              { label: "Airdrop", href: "/airdrop" },
+            ].map((item, i) => (
               <Link
                 key={i}
-                href={`#${item.toLowerCase()}`}
+                href={item.href}
                 className="text-[#b0d4cc] hover:text-[#00d4aa] transition-colors duration-300 relative group"
               >
-                {item}
+                {item.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00d4aa] to-[#d4af37] group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
@@ -62,13 +69,20 @@ export default function Header({ connectWallet, connected, publicKey }) {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="md:hidden pb-4 pt-4 flex flex-col gap-4 animate-slide-down">
-            {["Ecosystem", "Tokenomics", "Trading", "Roadmap", "Whitepaper"].map((item, i) => (
+            {[
+              { label: "Ecosystem", href: "#ecosystem" },
+              { label: "Tokenomics", href: "#tokenomics" },
+              { label: "Trading", href: "#trading" },
+              { label: "Roadmap", href: "#roadmap" },
+              { label: "Whitepaper", href: "#whitepaper" },
+              { label: "Airdrop", href: "/airdrop" },
+            ].map((item, i) => (
               <Link
                 key={i}
-                href={`#${item.toLowerCase()}`}
+                href={item.href}
                 className="text-[#b0d4cc] hover:text-[#00d4aa] transition-colors"
               >
-                {item}
+                {item.label}
               </Link>
             ))}
             <button
