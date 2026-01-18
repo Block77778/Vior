@@ -1,37 +1,53 @@
 'use client'
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import Link from 'next/link'
 import { Twitter, Instagram, Clock, CheckCircle } from 'lucide-react'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import { Check, Copy } from 'lucide-react'
+
+interface Countdown {
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
+}
 
 export default function AirdropPage() {
-  const [connected, setConnected] = useState(false);
-  const [publicKey, setPublicKey] = useState('');
-  const [walletAddress, setWalletAddress] = useState('');
-  const [copied, setCopied] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [countdown, setCountdown] = useState<Countdown>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  })
 
-  const connectWallet = () => {
-    // Placeholder for wallet connection logic
-    setConnected(true);
-    setPublicKey('samplePublicKey');
-  };
+  useEffect(() => {
+    const calculateCountdown = () => {
+      // January 22nd, 2026 at 00:00 GMT
+      const deadline = new Date('2026-01-22T00:00:00Z').getTime()
+      const now = new Date().getTime()
+      const difference = deadline - now
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Placeholder for form submission logic
-    setSubmitted(true);
-  };
+      if (difference > 0) {
+        setCountdown({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor(
+            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          ),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        })
+      } else {
+        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+      }
+    }
 
-  const handleCopyAddress = () => {
-    navigator.clipboard.writeText(publicKey);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+    calculateCountdown()
+    const timer = setInterval(calculateCountdown, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <main className="min-h-screen bg-[#0a1f1a] overflow-hidden">
@@ -98,8 +114,8 @@ export default function AirdropPage() {
                       4
                     </div>
                     <div>
-                      <h3 className="font-bold text-[#ffffff] mb-1">Wait & Receive</h3>
-                      <p className="text-[#b0d4cc]">Receive your 1000 VIOR tokens within 48 hours</p>
+                      <h3 className="font-bold text-[#ffffff] mb-1">Claim Before Deadline</h3>
+                      <p className="text-[#b0d4cc]">Comment before January 22nd, 2026 at 00:00 GMT to receive your airdrop</p>
                     </div>
                   </div>
                 </div>
@@ -152,7 +168,7 @@ export default function AirdropPage() {
                       </li>
                       <li className="flex gap-3">
                         <span className="text-[#00d4aa] font-bold">3.</span>
-                        <span>Wait 48 hours and check your Phantom wallet for the tokens</span>
+                        <span>Claim before January 22nd, 2026 at 00:00 GMT</span>
                       </li>
                     </ol>
                   </div>
@@ -185,17 +201,43 @@ export default function AirdropPage() {
                 </div>
               </div>
 
-              {/* Timeline Card */}
-              <div className="p-6 rounded-2xl border border-[#00d4aa]/20 bg-[#132b24]/30">
+              {/* Countdown Timer Card */}
+              <div className="p-6 rounded-2xl border border-[#00d4aa]/30 bg-gradient-to-br from-[#132b24]/50 to-[#0a1f1a]/50">
                 <div className="flex items-start gap-4">
                   <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#00d4aa]/20 border border-[#00d4aa]/50 flex-shrink-0">
                     <Clock size={24} className="text-[#00d4aa]" />
                   </div>
-                  <div>
-                    <h3 className="font-bold text-[#00d4aa] mb-1">Receive Within 48 Hours</h3>
-                    <p className="text-[#b0d4cc] text-sm">
-                      After commenting your wallet address on both X and Instagram, you will receive your 1000 VIOR tokens directly to your Phantom wallet within 48 hours.
+                  <div className="flex-1">
+                    <h3 className="font-bold text-[#00d4aa] mb-3">Airdrop Deadline</h3>
+                    <p className="text-[#b0d4cc] text-sm mb-4">
+                      Claim before January 22nd, 2026 at 00:00 GMT
                     </p>
+                    <div className="grid grid-cols-4 gap-2">
+                      <div className="p-3 rounded-lg bg-[#0a1f1a] border border-[#00d4aa]/20 text-center">
+                        <div className="text-2xl font-bold text-[#00d4aa]">
+                          {countdown.days}
+                        </div>
+                        <div className="text-xs text-[#b0d4cc] mt-1">Days</div>
+                      </div>
+                      <div className="p-3 rounded-lg bg-[#0a1f1a] border border-[#00d4aa]/20 text-center">
+                        <div className="text-2xl font-bold text-[#00d4aa]">
+                          {countdown.hours}
+                        </div>
+                        <div className="text-xs text-[#b0d4cc] mt-1">Hours</div>
+                      </div>
+                      <div className="p-3 rounded-lg bg-[#0a1f1a] border border-[#00d4aa]/20 text-center">
+                        <div className="text-2xl font-bold text-[#00d4aa]">
+                          {countdown.minutes}
+                        </div>
+                        <div className="text-xs text-[#b0d4cc] mt-1">Minutes</div>
+                      </div>
+                      <div className="p-3 rounded-lg bg-[#0a1f1a] border border-[#00d4aa]/20 text-center">
+                        <div className="text-2xl font-bold text-[#00d4aa]">
+                          {countdown.seconds}
+                        </div>
+                        <div className="text-xs text-[#b0d4cc] mt-1">Seconds</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
